@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import Section from './Section/Section';
 import SignForm from './SignForm/SignForm';
 import UserList from './UserList/UserList';
+import Filter from './Filter/Filter';
 
 class App extends Component {
   state = {
@@ -28,6 +29,10 @@ class App extends Component {
     this.reset();
   };
 
+  // filter = (array) =>
+  // {
+  //   return array.
+  //   }
   // *** For clear input and add element to array
   reset = () => {
     const contactCopy = [...this.state.contacts];
@@ -41,12 +46,13 @@ class App extends Component {
       contacts: contactCopy,
       name: '',
       number: '',
+      filter:'',
     });
     console.log(this.state.name);
   };
 
   render() {
-    const { name, number } = this.state;
+    const { name, number, filter, contacts } = this.state;
 
     return (
       <div
@@ -71,7 +77,9 @@ class App extends Component {
         </Section>
 
         <Section title="Contacts">
-          <UserList array={this.state.contacts} />
+          <UserList array={contacts}>
+            <Filter filter={filter} handleChange={this.handleChange} />
+          </UserList>
         </Section>
       </div>
     );
