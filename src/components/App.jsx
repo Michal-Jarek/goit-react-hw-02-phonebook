@@ -29,10 +29,17 @@ class App extends Component {
     this.reset();
   };
 
-  // filter = (array) =>
-  // {
-  //   return array.
-  //   }
+  handleFilter = (filter, array) => {
+    if (filter.length == 0) return this.state.contacts;
+    else {
+      const arrayCopy = [];
+      for (let a = 0; a < array.length; a++)
+        if (array[a].name.toLowerCase().indexOf(filter.toLowerCase()) != -1)
+          arrayCopy.push(array[a]);
+
+      return arrayCopy;
+    }
+  };
   // *** For clear input and add element to array
   reset = () => {
     const contactCopy = [...this.state.contacts];
@@ -41,14 +48,13 @@ class App extends Component {
       number: this.state.number,
       id: nanoid(),
     });
-    console.log(contactCopy);
+
     this.setState({
       contacts: contactCopy,
       name: '',
       number: '',
-      filter:'',
+      filter: '',
     });
-    console.log(this.state.name);
   };
 
   render() {
@@ -77,7 +83,7 @@ class App extends Component {
         </Section>
 
         <Section title="Contacts">
-          <UserList array={contacts}>
+          <UserList array={this.handleFilter(filter, contacts)}>
             <Filter filter={filter} handleChange={this.handleChange} />
           </UserList>
         </Section>

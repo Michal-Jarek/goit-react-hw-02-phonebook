@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Filter = ({ filter, array, handleChange }) => (
+const Filter = ({ filter, handleChange }) => (
   <label>
     Find contacts by name
     <input
