@@ -15,50 +15,54 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
   // ********************* Methods **************
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  handleSubmit = e => {
-    e.preventDefault();
+
+  handleSubmit = ({ name, number }) => {
+    const contactCopy = [...this.state.contacts];
+    if (
+      contactCopy.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+    contactCopy.push({
+      name: name,
+      number: number,
+      id: nanoid(),
+    });
+    this.setState({
+      contacts: contactCopy,
+      filter: '',
+    });
     console.log(`Signed up as: ${this.state.name}`);
-    this.reset();
   };
 
   handleFilter = (filter, array) => {
-    if (filter.length == 0) return this.state.contacts;
+    if (filter.length === 0) return this.state.contacts;
     else {
       const arrayCopy = [];
       for (let a = 0; a < array.length; a++)
-        if (array[a].name.toLowerCase().indexOf(filter.toLowerCase()) != -1)
+        if (array[a].name.toLowerCase().indexOf(filter.toLowerCase()) !== -1)
           arrayCopy.push(array[a]);
 
       return arrayCopy;
     }
   };
-  // *** For clear input and add element to array
-  reset = () => {
-    const contactCopy = [...this.state.contacts];
-    contactCopy.push({
-      name: this.state.name,
-      number: this.state.number,
-      id: nanoid(),
-    });
-
-    this.setState({
-      contacts: contactCopy,
-      name: '',
-      number: '',
-      filter: '',
-    });
+  handleDelete = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
   };
 
   render() {
-    const { name, number, filter, contacts } = this.state;
+    const { filter, contacts } = this.state;
 
     return (
       <div
@@ -74,16 +78,14 @@ class App extends Component {
         }}
       >
         <Section title="Phonebook">
-          <SignForm
-            name={name}
-            number={number}
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-          />
+          <SignForm handleSubmit={this.handleSubmit} />
         </Section>
 
         <Section title="Contacts">
-          <UserList array={this.handleFilter(filter, contacts)}>
+          <UserList
+            array={this.handleFilter(filter, contacts)}
+            handleDelete={this.handleDelete}
+          >
             <Filter filter={filter} handleChange={this.handleChange} />
           </UserList>
         </Section>
