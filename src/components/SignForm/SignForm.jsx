@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 
+import scss from './SignForm.module.scss';
+
 const INITIAL_STATE = {
   name: '',
   number: '',
@@ -28,10 +30,11 @@ class SignForm extends Component {
     const { name, number } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name
+      <form className={scss.form} onSubmit={this.handleSubmit}>
+        <label className={scss.label}>
+          Name:
           <input
+            className={scss.input}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -41,9 +44,10 @@ class SignForm extends Component {
             required
           />
         </label>
-        <label>
-          Number
+        <label className={scss.label}>
+          Number:
           <input
+            className={scss.input}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -53,7 +57,7 @@ class SignForm extends Component {
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button className={scss.button} type="submit">Add contact</button>
       </form>
     );
   }

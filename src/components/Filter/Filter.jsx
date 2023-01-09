@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 
+import scss from './Filter.module.scss';
+
 const Filter = ({ filter, handleChange }) => (
-  <label>
-    Find contacts by name
+  <label className={scss.label}>
+    Find contacts by name:
     <input
+      className={scss.input}
       type="text"
       name="filter"
       pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"

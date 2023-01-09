@@ -76,10 +76,11 @@ class App extends Component {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-start',
+          paddingLeft: '15px',
           alignItems: 'flex-start',
           fontSize: 40,
           color: '#010101',
-          marginLeft: 20,
+          backgroundColor: '#e6e3e3',
         }}
       >
         <Section title="Phonebook">
