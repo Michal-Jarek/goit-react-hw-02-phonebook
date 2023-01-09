@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const UserList = ({ array, children }) => {
+const UserList = ({ array, handleDelete, children }) => {
 
 
   return (
@@ -10,6 +10,7 @@ const UserList = ({ array, children }) => {
         {array.map(({ name, number, id }) => (
           <li key={id}>
             {name}: {number}
+            <button onClick={()=> handleDelete(id)}>Delete</button>
           </li>
         ))}
       </ul>
