@@ -18,6 +18,10 @@ const UserList = ({ array, handleDelete, children }) => {
   );
 };
 
-UserList.propTypes = {};
+UserList.propTypes = {
+  array: PropTypes.array,
+  handleDelete: PropTypes.func,
+  children: PropTypes.element,
+};
 
 export default UserList;

@@ -9,21 +9,23 @@ const INITIAL_STATE = {
 class SignForm extends Component {
   state = { ...INITIAL_STATE };
 
-
+  // ************ Methods *****************
   handleSubmit = e => {
     e.preventDefault();
     this.props.handleSubmit({ ...this.state });
     this.reset();
   };
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   reset = () => this.setState({ ...INITIAL_STATE });
 
-  render() {
+  // ************ End Methods *****************
 
-    const {name, number} = this.state;
+  render() {
+    const { name, number } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -57,6 +59,8 @@ class SignForm extends Component {
   }
 }
 
-SignForm.propTypes = {};
+SignForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default SignForm;

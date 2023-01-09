@@ -15,6 +15,10 @@ const Filter = ({ filter, handleChange }) => (
   </label>
 );
 
-Filter.propTypes = {};
+Filter.propTypes = {
+  filter: PropTypes.string,
+  handleChange: PropTypes.func,
+
+};
 
 export default Filter;
