@@ -44,7 +44,7 @@ class App extends Component {
       contacts: contactCopy,
       filter: '',
     });
-    console.log(`Signed up as: ${this.state.name}`);
+    console.log(`Signed up as: ${name}`);
   };
 
   handleFilter = (filter, array) => {
